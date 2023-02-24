@@ -11,7 +11,7 @@ const CardTotal = () => {
 
         <div>
           {data.map((item) => {
-            return <ProductCard {...item} />;
+            return <ProductCard key={item.id} {...item} />;
           })}
         </div>
       </div>
