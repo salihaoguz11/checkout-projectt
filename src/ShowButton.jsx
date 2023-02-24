@@ -1,9 +1,10 @@
+import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
-const ShowButton = () => {
+const ShowButton = ({ hideShowFunc }) => {
   return (
     <div className="d-flex justify-content-center">
-      <Button> Show / Hide </Button>
+      <Button>Show / Hide</Button>
     </div>
   );
 };
