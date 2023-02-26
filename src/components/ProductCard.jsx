@@ -2,14 +2,26 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { useState } from "react";
 
 const ProductCard = (props) => {
-  const { image, id, name, price } = props;
+  const { image, id, name, price, dampingRate } = props;
+  const [text, setText] = useState(1);
+
+  const [count, setCount] = useState(1);
+  const increase = (id) => {
+    setCount(count + 1);
+    setText(count);
+  };
+  const decrease = (id) => {
+    setCount(count - 1);
+    setText(count - 1);
+  };
 
   return (
     <Card
       className="d-flex row mb-3 justify-content-center align-items-center"
-      style={{ width: "30rem" }}
+      style={{ width: "32rem" }}
     >
       <Row>
         <Col>
@@ -17,21 +29,38 @@ const ProductCard = (props) => {
         </Col>
 
         <Col>
-          <Card.Body className="align-items-center">
+          <Card.Body className="align-items-center ">
             <Card.Title>{name}</Card.Title>
-            <Card.Text></Card.Text>
+            <Card.Text className="d-flex align-items-center">
+              <h2>${price} </h2>
+              <small className="mx-3">
+                <del>${(price / dampingRate).toFixed(2)}</del>{" "}
+              </small>
+            </Card.Text>
             <div className="d-flex align-items-center justify-content-between">
-              <Button variant="primary" className="px-3">
-                +
-              </Button>
-              <h3>1</h3>
-              <Button className="px-3" variant="primary">
+              <Button
+                variant="primary"
+                onClick={() => decrease(id)}
+                className="px-3"
+              >
                 -
+              </Button>
+              <h3>{text}</h3>
+              <Button
+                onClick={() => increase(id)}
+                className="px-3"
+                variant="primary"
+              >
+                +
               </Button>
             </div>
 
             <div className=" d-flex  mt-3 justify-content-center ">
-              <Button style={{ width: "100%" }} variant="danger">
+              <Button
+                style={{ width: "100%" }}
+                // onClick={() => deleteProduct(id)}
+                variant="danger"
+              >
                 Remove
               </Button>
             </div>
